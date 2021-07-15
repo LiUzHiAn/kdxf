@@ -3,7 +3,7 @@ import cv2
 import glob
 import os
 
-train_root = "./data/kdxf_cls/training_set"
+train_root = "../data/kdxf_cls/test_set"
 for cls_path in os.listdir(train_root):
     cls_imgs = glob.glob(os.path.join(train_root, cls_path, "*.jpg"))
     for img_path in cls_imgs:

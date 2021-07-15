@@ -32,32 +32,45 @@ class KDXFDataset(BaseDataset):
                 data_infos.append(info)
             return data_infos
 
+    def get_cat_ids(self, idx):
+        """Get category id by index.
 
-cfg = Config.fromfile('configs/resnet101_b32x8_imagenet.py')
+        Args:
+            idx (int): Index of data.
 
-# Set seed thus the results are more reproducible
-cfg.seed = 0
-set_random_seed(0, deterministic=False)
-cfg.gpu_ids = range(1)
+        Returns:
+            int: Image category of specified index.
+        """
 
-# Let's have a look at the final config used for finetuning
-print(f'Config:\n{cfg.pretty_text}')
+        return [int(self.data_infos[idx]['gt_label'])]
 
-# Create work_dir
-mmcv.mkdir_or_exist(osp.abspath(cfg.work_dir))
-# Build the classifier
-model = build_classifier(cfg.model)
-# Build the dataset
-datasets = [build_dataset(cfg.data.train)]
-# Add an attribute for visualization convenience
-model.CLASSES = datasets[0].CLASSES
 
-# Begin finetuning
-train_model(
-    model,
-    datasets,
-    cfg,
-    distributed=False,
-    validate=True,
-    timestamp=time.strftime('%Y%m%d_%H%M%S', time.localtime()),
-    meta=dict())
+if __name__ == '__main__':
+    cfg = Config.fromfile('configs/resnet101_b32x8_imagenet.py')
+
+    # Set seed thus the results are more reproducible
+    cfg.seed = 0
+    set_random_seed(0, deterministic=False)
+    cfg.gpu_ids = range(1)
+
+    # Let's have a look at the final config used for finetuning
+    print(f'Config:\n{cfg.pretty_text}')
+
+    # Create work_dir
+    mmcv.mkdir_or_exist(osp.abspath(cfg.work_dir))
+    # Build the classifier
+    model = build_classifier(cfg.model)
+    # Build the dataset
+    datasets = [build_dataset(cfg.data.train)]
+    # Add an attribute for visualization convenience
+    model.CLASSES = datasets[0].CLASSES
+
+    # Begin finetuning
+    train_model(
+        model,
+        datasets,
+        cfg,
+        distributed=False,
+        validate=True,
+        timestamp=time.strftime('%Y%m%d_%H%M%S', time.localtime()),
+        meta=dict())

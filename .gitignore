@@ -3,3 +3,8 @@
 
 data/
 work_dirs/
+
+submit/
+
+pre_process/*.pkl
+pre_process/*.json
