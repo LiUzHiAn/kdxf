@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     # Create work_dir
     mmcv.mkdir_or_exist(osp.abspath(cfg.work_dir))
-    # Build the classifier
+    # Build the classifiers
     model = build_classifier(cfg.model)
     # Build the dataset
     datasets = [build_dataset(cfg.data.train)]

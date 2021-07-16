@@ -14,10 +14,10 @@ train_pipeline = [
 test_pipeline = [
     dict(type='LoadImageFromFile'),
 
-    dict(type='Resize', size=(256, -1)),
+    # dict(type='Resize', size=(256, -1)),
 
-    # dict(type='RandomResizedCrop', size=224),
-    # dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
+    dict(type='RandomResizedCrop', size=224),
+    dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
 
     dict(type='CenterCrop', crop_size=224),
     dict(type='Normalize', **img_norm_cfg),
@@ -26,25 +26,22 @@ test_pipeline = [
 ]
 data = dict(
     samples_per_gpu=16,
-    workers_per_gpu=4,
+    workers_per_gpu=1,
     train=dict(
-        type='ClassBalancedDataset',
-        dataset=dict(
-            type=dataset_type,
-            data_prefix='data/kdxf_cls/training_set',
-            ann_file='data/kdxf_cls/train.txt',
-            classes='data/kdxf_cls/classes.txt',
-            pipeline=train_pipeline),
-        oversample_thr=0.02),
-    val=dict(
         type='ClassBalancedDataset',
         dataset=dict(
             type=dataset_type,
             data_prefix='data/kdxf_cls/training_set',
             ann_file='data/kdxf_cls/val.txt',
             classes='data/kdxf_cls/classes.txt',
-            pipeline=test_pipeline),
+            pipeline=train_pipeline),
         oversample_thr=0.02),
+    val=dict(
+        type=dataset_type,
+        data_prefix='data/kdxf_cls/training_set',
+        ann_file='data/kdxf_cls/val.txt',
+        classes='data/kdxf_cls/classes.txt',
+        pipeline=test_pipeline),
     test=dict(
         # replace `data/val` with `data/test` for standard test
         type=dataset_type,

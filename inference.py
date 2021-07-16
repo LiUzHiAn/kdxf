@@ -60,7 +60,7 @@ def inference_test_imgs(show_imgs=False):
 
     # Specify the path to config file and checkpoint file
     config_file = './configs/resnet101_b32x8_imagenet.py'
-    checkpoint_file = 'work_dirs/resnet101/latest.pth'
+    checkpoint_file = 'work_dirs/resnet101_clsBalanced/latest.pth'
 
     # Build the model from a config file and a checkpoint file
     model = init_model(config_file, checkpoint_file, device='cuda:0')
@@ -94,4 +94,4 @@ if __name__ == '__main__':
     # 字典中的key值即为csv中列名
     dataframe = pd.DataFrame({'image_id': img_name, 'category_id': pred_cls})
     # 将DataFrame存储为csv,index表示是否显示行名，default=True
-    dataframe.to_csv("./submit/resnet101_tta5.csv", index=False, sep=',')
+    dataframe.to_csv("./submit/resnet101_clsBalanced_tta5.csv", index=False, sep=',')
