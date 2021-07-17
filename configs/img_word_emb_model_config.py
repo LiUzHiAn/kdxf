@@ -6,7 +6,12 @@ model = dict(
         depth=101,
         num_stages=4,
         out_indices=(3,),
-        style='pytorch'),
+        style='pytorch',
+        init_cfg=dict(
+            type='Pretrained',
+            checkpoint="./work_dirs/resnet101_batch256_imagenet_20200708-753f3608.pth",
+            prefix='backbone')
+    ),
     emb_backbone=dict(
         type='WordEmbeddingBackbone',
         dim_embedding=200,
@@ -19,4 +24,5 @@ model = dict(
         in_channels=2048 + 1024,
         loss=dict(type='CrossEntropyLoss', loss_weight=1.0),
         topk=(1, 5),
-    ))
+    ),
+)
