@@ -1,6 +1,6 @@
 _base_ = [
-    './img_word_emb_model_config.py',
-    './img_word_emb_dataset_config.py',
+    './models/img_word_emb_model_config.py',
+    './datasets/img_word_emb_dataset_config.py',
 ]
 
 # optimizer
@@ -27,4 +27,4 @@ load_from = None
 resume_from = None
 workflow = [('train', 1)]
 
-work_dir = './work_dirs/r101_noPretrain_multiModal_clsBalanced'
+work_dir = './work_dirs/r101_multiModal_clsBalanced'

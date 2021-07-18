@@ -14,9 +14,10 @@ train_pipeline = [
 ]
 test_pipeline = [
     dict(type='LoadImageEmbeddingFromFile'),
+
     dict(type='Resize', size=(256, -1)),
 
-    # # TTA
+    # TTA
     # dict(type='RandomResizedCrop', size=224),
     # dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
 
@@ -27,14 +28,14 @@ test_pipeline = [
     dict(type='Collect', keys=['emb', 'img'])
 ]
 data = dict(
-    samples_per_gpu=32,
-    workers_per_gpu=8,
+    samples_per_gpu=16,
+    workers_per_gpu=1,
     train=dict(
         type='ClassBalancedDataset',
         dataset=dict(
             type=dataset_type,
             data_prefix='./data/kdxf_cls/training_set',
-            ann_file='./data/kdxf_cls/train.txt',
+            ann_file='./data/kdxf_cls/val.txt',
             classes='./data/kdxf_cls/classes.txt',
             pipeline=train_pipeline),
         oversample_thr=0.02),

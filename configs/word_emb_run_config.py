@@ -1,6 +1,6 @@
 _base_ = [
-    './word_emb_model_config.py',
-    './word_emb_dataset_config.py',
+    './models/word_emb_model_config.py',
+    './datasets/word_emb_dataset_config.py',
 ]
 
 # optimizer

@@ -7,10 +7,10 @@ model = dict(
         num_stages=4,
         out_indices=(3,),
         style='pytorch',
-        init_cfg=dict(
-            type='Pretrained',
-            checkpoint="./work_dirs/resnet101_batch256_imagenet_20200708-753f3608.pth",
-            prefix='backbone')
+        # init_cfg=dict(
+        #     type='Pretrained',
+        #     checkpoint="./work_dirs/resnet101_batch256_imagenet_20200708-753f3608.pth",
+        #     prefix='backbone')
     ),
     emb_backbone=dict(
         type='WordEmbeddingBackbone',
