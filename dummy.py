@@ -14,7 +14,6 @@ import numpy as np
 import torch
 from mmcls.models.classifiers import WordEmbeddingClassifier
 from mmcls.models import build_classifier
-from train import KDXFDataset
 
 
 def model_test():
@@ -43,7 +42,7 @@ def dataset_test():
     print(-1)
 
 
-def run_test():
+def img_word_emb_run_test():
     cfg = Config.fromfile('configs/img_word_emb_run_config.py')
 
     # Set seed thus the results are more reproducible
@@ -116,5 +115,5 @@ def swin_transformer_run():
 if __name__ == '__main__':
     # model_test()
     # dataset_test()
-    # run_test()
-    swin_transformer_run()
+    img_word_emb_run_test()
+    # swin_transformer_run()

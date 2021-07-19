@@ -153,10 +153,31 @@ def append_submit_clsName(submit_file="./submit/resnet101_multiModal_clsBalanced
     df.to_csv(submit_file.replace(".csv", "wClsName.csv"), index=False, sep=',')
 
 
+def analysis_submit_dist(submit_file="./submit/resnet101_multiModal_clsBalanced_tta5_wClsName.csv"):
+    """分析预测distribution"""
+    import matplotlib.pyplot as plt
+
+    df = pd.read_csv(submit_file, sep=',')
+    cls_pred = df.loc[:, ["category_id"]].values.reshape(-1)
+
+    num_pred_cls = np.zeros(137)
+    for cls in cls_pred:
+        num_pred_cls[cls] += 1
+
+    plt.plot(np.arange(137),num_pred_cls)
+    plt.xlabel('Class')
+    plt.ylabel('Num')
+    plt.show()
+    print(-1)
+
+
 if __name__ == '__main__':
-    img_name, pred_score, pred_cls = inference_test_imgs(show_imgs=False)
-    # 字典中的key值即为csv中列名
-    dataframe = pd.DataFrame({'image_id': img_name, 'category_id': pred_cls})
-    # 将DataFrame存储为csv,index表示是否显示行名，default=True
-    dataframe.to_csv("./submit/resnet101_multiModal_clsBalanced.csv", index=False, sep=',')
-    append_submit_clsName("./submit/resnet101_multiModal_clsBalanced.csv")
+    # img_name, pred_score, pred_cls = inference_test_imgs(show_imgs=False)
+    # # 字典中的key值即为csv中列名
+    # dataframe = pd.DataFrame({'image_id': img_name, 'category_id': pred_cls})
+    # # 将DataFrame存储为csv,index表示是否显示行名，default=True
+    # dataframe.to_csv("./submit/resnet101_multiModal_clsBalanced.csv", index=False, sep=',')
+    # append_submit_clsName("./submit/resnet101_multiModal_clsBalanced.csv")
+
+    # ==========================
+    analysis_submit_dist()

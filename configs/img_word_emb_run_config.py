@@ -8,7 +8,7 @@ optimizer = dict(type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
 # learning policy
 lr_config = dict(policy='step', step=[40, 70, 90])  # [50, 75]
-runner = dict(type='EpochBasedRunner', max_epochs=100)
+runner = dict(type='EpochBasedRunner', max_epochs=110)
 
 # checkpoint saving
 checkpoint_config = dict(interval=10, max_keep_ckpts=5)
@@ -27,4 +27,4 @@ load_from = None
 resume_from = None
 workflow = [('train', 1)]
 
-work_dir = './work_dirs/r101_multiModal_clsBalanced'
+work_dir = './work_dirs/r101_multiModal_clsBalanced_MoE'
