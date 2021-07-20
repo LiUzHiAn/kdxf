@@ -114,7 +114,7 @@ def inference_test_imgs(show_imgs=False):
 
     # Specify the path to config file and checkpoint file
     config_file = './configs/img_word_emb_run_config.py'
-    checkpoint_file = 'work_dirs/r101_multiModal_clsBalanced/latest.pth'
+    checkpoint_file = 'work_dirs/r101_multiModal_clsBalanced_MoE_labelSmooth/epoch_110.pth'
 
     # Build the model from a config file and a checkpoint file
     model = init_model(config_file, checkpoint_file, device='cuda:0')
@@ -164,7 +164,7 @@ def analysis_submit_dist(submit_file="./submit/resnet101_multiModal_clsBalanced_
     for cls in cls_pred:
         num_pred_cls[cls] += 1
 
-    plt.plot(np.arange(137),num_pred_cls)
+    plt.plot(np.arange(137), num_pred_cls)
     plt.xlabel('Class')
     plt.ylabel('Num')
     plt.show()
@@ -172,12 +172,12 @@ def analysis_submit_dist(submit_file="./submit/resnet101_multiModal_clsBalanced_
 
 
 if __name__ == '__main__':
-    # img_name, pred_score, pred_cls = inference_test_imgs(show_imgs=False)
-    # # 字典中的key值即为csv中列名
-    # dataframe = pd.DataFrame({'image_id': img_name, 'category_id': pred_cls})
-    # # 将DataFrame存储为csv,index表示是否显示行名，default=True
-    # dataframe.to_csv("./submit/resnet101_multiModal_clsBalanced.csv", index=False, sep=',')
-    # append_submit_clsName("./submit/resnet101_multiModal_clsBalanced.csv")
+    img_name, pred_score, pred_cls = inference_test_imgs(show_imgs=False)
+    # 字典中的key值即为csv中列名
+    dataframe = pd.DataFrame({'image_id': img_name, 'category_id': pred_cls})
+    # 将DataFrame存储为csv,index表示是否显示行名，default=True
+    dataframe.to_csv("./submit/resnet101_multiModal_MoE_labelSmoothing_clsBalanced_epo110_tta5.csv", index=False, sep=',')
+    append_submit_clsName("./submit/resnet101_multiModal_MoE_labelSmoothing_clsBalanced_epo110_tta5.csv")
 
     # ==========================
-    analysis_submit_dist()
+    # analysis_submit_dist()

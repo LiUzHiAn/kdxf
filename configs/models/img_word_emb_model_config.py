@@ -2,14 +2,14 @@
 model = dict(
     type='ImageWordEmbeddingClassifier',
     img_backbone=dict(
-        type='ResNet',
-        depth=101,
+        type='ResNetV1d',
+        depth=152,
         num_stages=4,
         out_indices=(3,),
         style='pytorch',
         init_cfg=dict(
             type='Pretrained',
-            checkpoint="./work_dirs/resnet101_batch256_imagenet_20200708-753f3608.pth",
+            checkpoint="./work_dirs/resnetv1d152_b32x8_imagenet_20210531-278cf22a.pth",
             prefix='backbone')
     ),
     emb_backbone=dict(

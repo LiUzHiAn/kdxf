@@ -11,7 +11,7 @@ lr_config = dict(policy='step', step=[40, 70, 90])  # [50, 75]
 runner = dict(type='EpochBasedRunner', max_epochs=110)
 
 # checkpoint saving
-checkpoint_config = dict(interval=10, max_keep_ckpts=5)
+checkpoint_config = dict(interval=10, max_keep_ckpts=8)
 # yapf:disable
 log_config = dict(
     interval=100,
@@ -27,4 +27,4 @@ load_from = None
 resume_from = None
 workflow = [('train', 1)]
 
-work_dir = './work_dirs/r101_multiModal_clsBalanced_MoE'
+work_dir = './work_dirs/r_V1D152_multiModal_clsBalanced_MoE_labelSmoothing'

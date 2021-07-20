@@ -4,7 +4,7 @@ img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
     dict(type='LoadImageEmbeddingFromFile'),
-    dict(type='RandomResizedCrop', size=224),
+    dict(type='RandomResizedCrop', size=224, backend="pillow"),
     dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
     dict(type='Normalize', **img_norm_cfg),
     dict(type='ImageToTensor', keys=['img']),
@@ -15,7 +15,7 @@ train_pipeline = [
 test_pipeline = [
     dict(type='LoadImageEmbeddingFromFile'),
 
-    dict(type='Resize', size=(256, -1)),
+    dict(type='Resize', size=(256, -1), backend="pillow"),
 
     # TTA
     # dict(type='RandomResizedCrop', size=224),
@@ -28,14 +28,14 @@ test_pipeline = [
     dict(type='Collect', keys=['emb', 'img'])
 ]
 data = dict(
-    samples_per_gpu=16,
-    workers_per_gpu=1,
+    samples_per_gpu=32,
+    workers_per_gpu=4,
     train=dict(
         type='ClassBalancedDataset',
         dataset=dict(
             type=dataset_type,
             data_prefix='./data/kdxf_cls/training_set',
-            ann_file='./data/kdxf_cls/val.txt',
+            ann_file='./data/kdxf_cls/train.txt',
             classes='./data/kdxf_cls/classes.txt',
             pipeline=train_pipeline),
         oversample_thr=0.02),
