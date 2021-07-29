@@ -15,11 +15,11 @@ train_pipeline = [
 test_pipeline = [
     dict(type='LoadImageEmbeddingFromFile'),
 
-    dict(type='Resize', size=(256, -1), backend="pillow"),
+    # dict(type='Resize', size=(256, -1), backend="pillow"),
 
     # TTA
-    # dict(type='RandomResizedCrop', size=224),
-    # dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
+    dict(type='RandomResizedCrop', size=224),
+    dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
 
     dict(type='CenterCrop', crop_size=224),
     dict(type='Normalize', **img_norm_cfg),
