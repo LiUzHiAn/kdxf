@@ -12,10 +12,15 @@ resnet101暴力分类
 用的是[easyOCR](https://github.com/JaidedAI/EasyOCR)
 
 ## 待考虑的方向
-1. 在多模态的head加上label smoothing; TODO
-2. MoE, mixture of experts;已经写好了.TODO
+1. 在多模态的head加上label smoothing; 
+2. MoE, mixture of experts;已经写好了.
 
-1和2一起跑
+1和2一起跑, 大概率是label smoothing的作用
 
-3. 把验证集的数据也丢进来训练
-4. 换backbone,试下densenet,Xception等,甚至将两个网络的特征融合
+3. Focal Loss
+用 BalancedDataset做数据增强, 用Focal loss学习难样本,写了一个`LabelSmoothFocalLoss`类   
+
+4. 把验证集的数据也丢进来训练
+  
+
+5. 换backbone,试下densenet,Xception等,甚至将两个网络的特征融合

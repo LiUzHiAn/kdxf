@@ -2,14 +2,14 @@
 model = dict(
     type='ImageWordEmbeddingClassifier',
     img_backbone=dict(
-        type='ResNetV1d',
-        depth=152,
+        type='ResNet',
+        depth=101,
         num_stages=4,
         out_indices=(3,),
         style='pytorch',
         init_cfg=dict(
             type='Pretrained',
-            checkpoint="./work_dirs/resnetv1d152_b32x8_imagenet_20210531-278cf22a.pth",
+            checkpoint="./work_dirs/resnet101_batch256_imagenet_20200708-753f3608.pth",
             prefix='backbone')
     ),
     emb_backbone=dict(
@@ -34,7 +34,13 @@ model = dict(
         hidden_channels=1024,
         se_reduction=2,
         # loss=dict(type='CrossEntropyLoss', loss_weight=1.0),
-        loss=dict(type='LabelSmoothLoss', label_smooth_val=0.1, mode='original'),
+        # loss=dict(type='LabelSmoothLoss', label_smooth_val=0.1, mode='original'),
+
+        loss=dict(type='LabelSmoothFocalLoss', label_smooth_val=0.1,
+                  # alpha=[1 * 0.1] * 21 + [2 * 0.1] * 15 + [4 * 0.1] * 26 +
+                  #       [8 * 0.1] * 22 + [16 * 0.1] * 15 + [32 * 0.1] * 28,
+                  alpha=[1] * 137,
+                  gamma=2.0, num_classes=137, mode='original'),
         topk=(1, 5),
     ),
 )
