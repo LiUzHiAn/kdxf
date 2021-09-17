@@ -6,6 +6,27 @@
 The dataset is collected by the competition offical and I have no right to redistribute to others, so please download it from [here](http://challenge.xfyun.cn/topic/info?type=ad-2021) and place it in the `data`  folder of the root directory in this repo. 
 
 The dataset structure should be similar as follows:
+```
+./data/kdxf_cls
+├── training_set
+│   ├── 0
+│   │  ├── a.jpg
+│   │  ├── b.jpg
+│   │  ├── c.jpg
+│   ├── 1
+│   │  ├── d.jpg
+│   │  ├── e.jpg
+│   │  ├── f.jpg
+│   ├── 2
+│   ├── ...
+│   ├── 108
+├── test_set
+│   ├── 1.jpg
+│   ├── 2.jpg
+│   ├── 3.jpg
+│   ├── ...
+│   ├── xxx.jpg
+```
 
 ### 1. OCR
 
@@ -56,3 +77,52 @@ This script will make use of the `kdxf_w2v_embeddings.pkl` file and the .txt fil
 ### 4. Well-done!
 
 Congrats! You've finished all the preprocessing procedures.
+
+You data structure should be similar as follows:
+```
+./data/kdxf_cls
+├── training_set
+│   ├── 0
+│   │  ├── a.jpg
+│   │  ├── b.jpg
+│   │  ├── c.jpg
+│   ├── 1
+│   │  ├── d.jpg
+│   │  ├── e.jpg
+│   │  ├── f.jpg
+│   ├── 2
+│   ├── ...
+│   ├── 108
+├── training_set_txt
+│   ├── 0
+│   │  ├── a.txt
+│   │  ├── a.json
+│   │  ├── a.npy
+│   │  ├── b.txt
+│   │  ├── b.json
+│   │  ├── b.npy
+│   ├── 1
+│   │  ├── d.txt
+│   │  ├── d.json
+│   │  ├── d.npy
+│   │  ├── e.txt
+│   │  ├── e.json
+│   │  ├── e.npy
+│   ├── 2
+│   ├── ...
+│   ├── 108
+├── test_set
+│   ├── 1.jpg
+│   ├── 2.jpg
+│   ├── 3.jpg
+│   ├── ...
+│   ├── xxx.jpg
+├── test_set_txt
+│   ├── 1.txt
+│   ├── 1.json
+│   ├── 1.npy
+│   ├── ...
+│   ├── xxx.txt
+│   ├── xxx.json
+│   ├── xxx.npy
+```

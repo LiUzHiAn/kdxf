@@ -112,6 +112,6 @@ if __name__ == '__main__':
     get_training_set_embeddings(vis_emb=False)
     get_test_set_embeddings(vis_emb=False)
 
-    arr = np.load("/home/liuzhian/hdd4T/code/kdxf/data/kdxf_cls/training_set_txt/113/12539.npy")
-    assert arr.shape[0] == 200
-    print(-1)
+    # arr = np.load("/home/liuzhian/hdd4T/code/kdxf/data/kdxf_cls/training_set_txt/113/12539.npy")
+    # assert arr.shape[0] == 200
+    # print(-1)
