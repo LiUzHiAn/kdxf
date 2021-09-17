@@ -27,4 +27,4 @@ load_from = None
 resume_from = None
 workflow = [('train', 1)]
 
-work_dir = './work_dirs/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss'
+work_dir = './work_dirs/r101_multiModal_clsBalancedRF2_MoE_labelSmoothing_FocalLoss_fullTrain'

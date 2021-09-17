@@ -72,7 +72,7 @@ def img_word_emb_run_test():
         datasets,
         cfg,
         distributed=False,
-        validate=True,
+        validate=False,
         timestamp=time.strftime('%Y%m%d_%H%M%S', time.localtime()),
         meta=dict())
 

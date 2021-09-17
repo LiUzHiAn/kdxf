@@ -15,11 +15,11 @@ train_pipeline = [
 test_pipeline = [
     dict(type='LoadImageEmbeddingFromFile'),
 
-    dict(type='Resize', size=(256, -1), backend="pillow"),
+    # dict(type='Resize', size=(256, -1), backend="pillow"),
 
-    # # TTA
-    # dict(type='RandomResizedCrop', size=224),
-    # dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
+    # TTA
+    dict(type='RandomResizedCrop', size=224),
+    dict(type='RandomFlip', flip_prob=0.5, direction='horizontal'),
 
     dict(type='CenterCrop', crop_size=224),
     dict(type='Normalize', **img_norm_cfg),
@@ -35,7 +35,7 @@ data = dict(
         dataset=dict(
             type=dataset_type,
             data_prefix='./data/kdxf_cls/training_set',
-            ann_file='./data/kdxf_cls/train.txt',
+            ann_file='./data/kdxf_cls/train_full.txt',
             classes='./data/kdxf_cls/classes.txt',
             pipeline=train_pipeline),
         oversample_thr=0.02),
@@ -44,12 +44,12 @@ data = dict(
     # ann_file='./data/kdxf_cls/train.txt',
     # classes='./data/kdxf_cls/classes.txt',
     # pipeline=train_pipeline),
-    val=dict(
-        type=dataset_type,
-        data_prefix='./data/kdxf_cls/training_set',
-        ann_file='./data/kdxf_cls/val.txt',
-        classes='./data/kdxf_cls/classes.txt',
-        pipeline=test_pipeline),
+    # val=dict(
+    #     type=dataset_type,
+    #     data_prefix='./data/kdxf_cls/training_set',
+    #     ann_file='./data/kdxf_cls/val.txt',
+    #     classes='./data/kdxf_cls/classes.txt',
+    #     pipeline=test_pipeline),
     test=dict(
         # replace `data/val` with `data/test` for standard test
         type=dataset_type,
@@ -57,4 +57,4 @@ data = dict(
         ann_file='./data/kdxf_cls/test.txt',
         classes='./data/kdxf_cls/classes.txt',
         pipeline=test_pipeline))
-evaluation = dict(interval=1, metric='accuracy', metric_options=dict(topk=(1, 5)))
+# evaluation = dict(interval=1, metric='accuracy', metric_options=dict(topk=(1, 5)))

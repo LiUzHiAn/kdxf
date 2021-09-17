@@ -66,4 +66,5 @@ def get_test_set_ocr():
 
 
 if __name__ == '__main__':
+    get_training_set_ocr()
     get_test_set_ocr()

@@ -8,5 +8,13 @@ submit/
 
 pre_process/*.pkl
 pre_process/*.json
+pre_process/clean_illegal_img.py
+pre_process/cnt_dataset_stats.py
+pre_process/gen_my_cls_name.py
+pre_process/readme.md
 
-INFO
+configs/
+datasets/
+models/
+
+*.py

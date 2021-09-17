@@ -91,7 +91,7 @@ def my_show_result(img, result):
     return cv2.cvtColor(np.asarray(img_pil), cv2.COLOR_RGB2BGR)
 
 
-def tta(func, model, img_path, num_aug=5):
+def tta(func, model, img_path, num_aug=9):
     """测试时增强,测试num_aug次,求平均"""
     probs = []
     for i in range(num_aug):
@@ -114,7 +114,7 @@ def inference_test_imgs(show_imgs=False):
 
     # Specify the path to config file and checkpoint file
     config_file = './configs/img_word_emb_run_config.py'
-    checkpoint_file = 'work_dirs/r_V1D152_multiModal_clsBalanced_MoE_labelSmoothing/epoch_90.pth'
+    checkpoint_file = 'work_dirs/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain/epoch_110.pth'
 
     # Build the model from a config file and a checkpoint file
     model = init_model(config_file, checkpoint_file, device='cuda:0')
@@ -176,8 +176,10 @@ if __name__ == '__main__':
     # 字典中的key值即为csv中列名
     dataframe = pd.DataFrame({'image_id': img_name, 'category_id': pred_cls})
     # 将DataFrame存储为csv,index表示是否显示行名，default=True
-    dataframe.to_csv("./submit/resnetV1D152_multiModal_MoE_labelSmoothing_clsBalanced_epo90_tta5.csv", index=False, sep=',')
-    # append_submit_clsName("./submit/resnetV1D152_multiModal_MoE_labelSmoothing_clsBalanced_epo110_tta5.csv")
+    dataframe.to_csv("./submit/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain_epoch110_tta9.csv", index=False, sep=',')
+
+
+    # append_submit_clsName("./submit/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain_bs64_ttaScale0.6_tta5.csv")
 
     # ==========================
     # analysis_submit_dist()

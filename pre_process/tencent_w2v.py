@@ -11,11 +11,14 @@ EMB_DIM = 200
 
 
 def load_tencent_w2v():
+    ## very time-consuming
     # tc_wv_model = KeyedVectors.load_word2vec_format(PRE_TRAINED_FILE, binary=False, limit=4000000)
-    tc_wv_model = KeyedVectors.load(PRE_TRAINED_FILE)
-    # 保存为二进制
+
+    ## https://wiki.dongxing.xin/pages/58ce59/#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95
+    ## 保存为二进制, 加快读取速度
     # tc_wv_model.save(PRE_TRAINED_FILE.replace(".txt", ".bin"))
 
+    tc_wv_model = KeyedVectors.load(PRE_TRAINED_FILE)
     with open("tc_w2v_key2idx.json", "w") as fp:
         json.dump(tc_wv_model.key_to_index, fp)
 
@@ -70,7 +73,7 @@ def get_tokens_embeddings():
 
 
 if __name__ == '__main__':
-    # get_tokens_embeddings()
+    get_tokens_embeddings()
 
     with open("kdxf_w2v_embeddings.pkl", "rb") as fp:
         tokens_info = pickle.load(fp)
