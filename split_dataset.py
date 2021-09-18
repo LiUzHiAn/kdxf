@@ -1,7 +1,7 @@
 import os
 import mmcv
 import os.path as osp
-
+import argparse
 from itertools import chain
 
 data_root = './data/kdxf_cls'
@@ -66,5 +66,10 @@ def gen_test_anno_file():
 
 
 if __name__ == '__main__':
-    train_val_split(split_frac=0.85)
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--split", type=float, default=0.85)
+    args = parser.parse_args()
+
+    train_val_split(args.split)
     gen_test_anno_file()

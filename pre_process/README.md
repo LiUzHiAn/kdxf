@@ -1,9 +1,9 @@
 ## Data preprocessing
 
 
-## 0. Dataset
+## 0. KDXF Dataset
 
-The dataset is collected by the competition offical and I have no right to redistribute to others, so please download it from [here](http://challenge.xfyun.cn/topic/info?type=ad-2021) and place it in the `data`  folder of the root directory in this repo. 
+The KDXF dataset is collected by the competition official and I have no right to redistribute to others, so please download it from [here](http://challenge.xfyun.cn/topic/info?type=ad-2021) and place it in the `data`  folder of the root directory in this repo. 
 
 The dataset structure should be similar as follows:
 ```
@@ -41,7 +41,7 @@ The above script will save the sentences into a .txt file with same name of the 
 
 ### 2. Tokenization
 
-We use [jibe](https://github.com/fxsjy/jieba) as the tokenizer. whose objective is to segment the sentence into tokens. Suppose you are in the `pre_process` directory, then executing:
+We use [jieba](https://github.com/fxsjy/jieba) as the tokenizer. whose objective is to segment the sentence into tokens. Suppose you are in the `pre_process` directory, then executing:
 
 ```python
 $ python jieba_seg.py

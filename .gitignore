@@ -2,6 +2,13 @@
 *__pycache__/
 
 data/
+!data/kdxf_cls/train.txt
+!data/kdxf_cls/val.txt
+!data/kdxf_cls/test.txt
+!data/kdxf_cls/val.txt
+!data/kdxf_cls/classes.txt
+!data/kdxf_cls/cls_id_to_name.json
+
 work_dirs/
 
 submit/
@@ -13,9 +20,5 @@ pre_process/cnt_dataset_stats.py
 pre_process/gen_my_cls_name.py
 pre_process/docs.md
 
-configs/
-datasets/
-models/
-
-*.py
 exp_logs.md
+dataset_analysis.md

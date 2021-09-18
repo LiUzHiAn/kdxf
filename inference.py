@@ -8,17 +8,10 @@ import numpy as np
 from PIL import ImageFont, ImageDraw, Image
 import os.path as osp
 from tqdm import tqdm
-import warnings
-
-import matplotlib.pyplot as plt
-import mmcv
-import numpy as np
 import torch
 from mmcv.parallel import collate, scatter
-from mmcv.runner import load_checkpoint
-
 from mmcls.datasets.pipelines import Compose
-from mmcls.models import build_classifier
+import argparse
 
 with open("./data/kdxf_cls/cls_id_to_name.json", 'r') as fp:
     cls_id_to_name = json.load(fp)
@@ -91,7 +84,7 @@ def my_show_result(img, result):
     return cv2.cvtColor(np.asarray(img_pil), cv2.COLOR_RGB2BGR)
 
 
-def tta(func, model, img_path, num_aug=9):
+def tta(func, model, img_path, num_aug=5):
     """测试时增强,测试num_aug次,求平均"""
     probs = []
     for i in range(num_aug):
@@ -107,17 +100,13 @@ def tta(func, model, img_path, num_aug=9):
     return result
 
 
-def inference_test_imgs(show_imgs=False):
+def inference_test_imgs(cfg_file, ckpt_file, show_imgs=False):
     img_name_column = []
     pred_cls_column = []
     pred_score_column = []
 
-    # Specify the path to config file and checkpoint file
-    config_file = './configs/img_word_emb_run_config.py'
-    checkpoint_file = 'work_dirs/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain/epoch_110.pth'
-
     # Build the model from a config file and a checkpoint file
-    model = init_model(config_file, checkpoint_file, device='cuda:0')
+    model = init_model(cfg_file, ckpt_file, device='cuda:0')
     # Test a single image
     with open("./data/kdxf_cls/test.txt", 'r') as fp:
         test_imgs = fp.readlines()
@@ -172,14 +161,25 @@ def analysis_submit_dist(submit_file="./submit/resnet101_multiModal_clsBalanced_
 
 
 if __name__ == '__main__':
-    img_name, pred_score, pred_cls = inference_test_imgs(show_imgs=False)
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "--cfg", type=str, default='configs/img_word_emb_run_config',
+        help='mmclassification格式的参数文件')
+    parser.add_argument(
+        "--ckpt", type=str,
+        default='work_dirs/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain/epoch_110.pth',
+        help='mmclassification格式的参数文件')
+    parser.add_argument(
+        "--save_csv", type=str,
+        default='./submit/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain_epoch110_tta5.csv',
+        help='测试集推理结果,保存到csv文件')
+
+    args = parser.parse_args()
+
+    img_name, pred_score, pred_cls = inference_test_imgs(args.cfg, args.ckpt, show_imgs=False)
+
     # 字典中的key值即为csv中列名
     dataframe = pd.DataFrame({'image_id': img_name, 'category_id': pred_cls})
     # 将DataFrame存储为csv,index表示是否显示行名，default=True
-    dataframe.to_csv("./submit/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain_epoch110_tta9.csv", index=False, sep=',')
-
-
-    # append_submit_clsName("./submit/r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain_bs64_ttaScale0.6_tta5.csv")
-
-    # ==========================
-    # analysis_submit_dist()
+    dataframe.to_csv(args.save_csv, index=False, sep=',')
