@@ -103,3 +103,7 @@ $ python inference.py --cfg <path/to/config> \
 This script will save the inference result in a .csv file you specify, according to the given model config and ckpt weights.
 ## 5. Result
 We get 87.221% Top-1 classification accuracy on the test set currently.
+
+## 6. Pre-trained model
+- r101_multiModal_clsBalanced_MoE_labelSmoothing_FocalLoss_fullTrain [[Google-Driver]](https://drive.google.com/drive/folders/1Kxs6dp1M7JRFystzGOhcBvPocH3WomAa)
+
