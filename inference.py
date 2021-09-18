@@ -13,7 +13,7 @@ from mmcv.parallel import collate, scatter
 from mmcls.datasets.pipelines import Compose
 import argparse
 
-with open("./data/kdxf_cls/cls_id_to_name.json", 'r') as fp:
+with open("./cls_id_to_name.json", 'r') as fp:
     cls_id_to_name = json.load(fp)
 
 
